@@ -1,0 +1,99 @@
+<div class="container py-4">
+
+  <!-- Header -->
+  <div class="row align-items-center mb-4">
+    <div class="col-md-2 mb-2 text-center text-md-start">
+      <p-button
+        routerLink="/"
+        label="Home"
+        styleClass="p-button-rounded p-button-outlined w-100">
+      </p-button>
+    </div>
+
+    <div class="col text-center">
+      <h2 class="fw-bold m-0" style="letter-spacing: 0.4px;">
+        Deaths Due to Drinking
+      </h2>
+      <div class="text-muted mt-1" style="font-size: 15px;">
+        {{ selectedYear }} / {{ selectedState }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="row justify-content-center g-3 mb-4">
+
+    <div class="col-md-4">
+      <label class="form-label fw-semibold">Select Year</label>
+      <p-dropdown
+        [options]="years"
+        [(ngModel)]="selectedYear"
+        placeholder="Choose a Year"
+        optionLabel="year"
+        optionValue="value"
+        [showClear]="true"
+        styleClass="w-100"
+        (ngModelChange)="getDeathsPerMonthData(selectedYear, selectedState)">
+      </p-dropdown>
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label fw-semibold">Select State</label>
+      <p-dropdown
+        [options]="states"
+        [(ngModel)]="selectedState"
+        placeholder="Choose a State"
+        optionLabel="state"
+        optionValue="value"
+        [showClear]="true"
+        styleClass="w-100"
+        (ngModelChange)="getDeathsPerMonthData(selectedYear, selectedState)">
+      </p-dropdown>
+    </div>
+
+  </div>
+
+  <!-- Table Section -->
+  <div class="row justify-content-center">
+    <div class="col-md-9">
+
+      <p-card styleClass="shadow-sm border-0 rounded-3">
+        <ng-template pTemplate="header">
+          <h4 class="fw-semibold text-center m-0 py-1">
+            Drinking Level Death Statistics
+          </h4>
+        </ng-template>
+
+        <p-table
+          [value]="deaths_data"
+          [paginator]="true"
+          [rows]="10"
+          [rowsPerPageOptions]="[5, 10, 20]"
+          [showCurrentPageReport]="true"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          responsiveLayout="scroll"
+          styleClass="p-datatable-striped p-datatable-sm">
+
+          <!-- Table Header -->
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="text-center">Drinking Level</th>
+              <th class="text-center">Death Count</th>
+            </tr>
+          </ng-template>
+
+          <!-- Table Body -->
+          <ng-template pTemplate="body" let-row>
+            <tr>
+              <td class="text-center fw-medium">{{ row.type }}</td>
+              <td class="text-center fw-bold text-danger">{{ row.death_count }}</td>
+            </tr>
+          </ng-template>
+
+        </p-table>
+      </p-card>
+
+    </div>
+  </div>
+
+</div>
