@@ -6,8 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class GlobalserviceService {
 
-  // baseapi:string="https://cancerapi2.azurewebsites.net"
-  baseapi:string="http://127.0.0.1:8000"
+  baseapi:string="https://e7go3fz6p4eihtpjprwgkiu3nm0jgdfz.lambda-url.us-east-2.on.aws"
+
 
   constructor(private http:HttpClient) { }
 
